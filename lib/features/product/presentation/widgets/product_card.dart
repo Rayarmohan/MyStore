@@ -25,18 +25,21 @@ class ProductCard extends StatelessWidget {
               flex: 3,
               child: ClipRRect(
                 borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
-                child: CachedNetworkImage(
-                  imageUrl: product.image,
-                  width: double.infinity,
-                  fit: BoxFit.contain,
-                  placeholder: (context, url) => Shimmer.fromColors(
-                    baseColor: Colors.grey[300]!,
-                    highlightColor: Colors.grey[100]!,
-                    child: Container(color: Colors.white),
-                  ),
-                  errorWidget: (context, url, error) => Container(
-                    color: Colors.grey[200],
-                    child: const Icon(Icons.image_not_supported, color: Colors.grey),
+                child: Hero(
+                  tag: 'product_${product.id}',
+                  child: CachedNetworkImage(
+                    imageUrl: product.image,
+                    width: double.infinity,
+                    fit: BoxFit.contain,
+                    placeholder: (context, url) => Shimmer.fromColors(
+                      baseColor: Colors.grey[300]!,
+                      highlightColor: Colors.grey[100]!,
+                      child: Container(color: Colors.white),
+                    ),
+                    errorWidget: (context, url, error) => Container(
+                      color: Colors.grey[200],
+                      child: const Icon(Icons.image_not_supported, color: Colors.grey),
+                    ),
                   ),
                 ),
               ),
@@ -53,7 +56,8 @@ class ProductCard extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w700,
+                        color: Theme.of(context).textTheme.bodyLarge?.color,
                         height: 1.2,
                       ),
                     ),
